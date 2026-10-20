@@ -32,9 +32,7 @@
 			<span>Process,</span>
 			<span class="accent">not polish.</span>
 		</h2>
-		<p class="lede">
-			A short studio strip — floor, cut, stamp, drip. Different job from the manifesto above.
-		</p>
+		<p class="lede">Floor, cut, stamp, drip — the short version of how a canvas gets loud.</p>
 	</header>
 
 	<div class="strip">

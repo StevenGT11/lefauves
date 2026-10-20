@@ -3,99 +3,120 @@
 	import { reveal } from '../attach/reveal.js';
 </script>
 
-<section id="work" class="work" {@attach reveal(0.06)}>
+<section id="work" class="work" {@attach reveal(0.04)}>
 	<header class="head">
 		<p class="kicker">selected canvases</p>
-		<h2>The paintings are the site.</h2>
-		<p class="sub">Real studio photos — collage, drips, masks. No placeholders.</p>
+		<h2>
+			<span class="stamp">The paintings</span>
+			<span class="stamp accent">are the site.</span>
+		</h2>
 	</header>
 
-	<div class="stack">
+	<div class="wall" aria-label="Studio canvas collage">
 		{#each works as piece, i (piece.id)}
-			<article class="piece" class:offset={i % 2 === 1} style:--i={i}>
+			<article
+				class={['piece', piece.slot]}
+				style:--i={i}
+				style:--rot="{[-3.2, 2.4, -1.6, 3.1, -2.5, 1.8][i % 6]}deg"
+			>
 				<figure>
 					<img src={piece.src} alt={piece.alt} loading="lazy" />
 					<img class="drip" src="/art/drip-overlay.svg" alt="" aria-hidden="true" />
+					<div class="graffiti">
+						<p class="year">{piece.year}</p>
+						<h3>{piece.title}</h3>
+						<p class="note">{piece.note}</p>
+					</div>
 				</figure>
-				<div class="meta">
-					<p class="year">{piece.year}</p>
-					<h3>{piece.title}</h3>
-					<p class="note">{piece.note}</p>
-				</div>
 			</article>
 		{/each}
+		<p class="wall-tag" aria-hidden="true">@lefauves</p>
 	</div>
 </section>
 
 <style>
 	.work {
-		padding: clamp(2.5rem, 7vh, 4rem) 0 clamp(2rem, 5vh, 3rem);
-		background: var(--canvas);
+		position: relative;
+		padding: clamp(2.5rem, 7vh, 4.5rem) 0 clamp(3rem, 8vh, 5.5rem);
+		background:
+			radial-gradient(ellipse at 10% 20%, color-mix(in oklab, var(--pink) 14%, transparent), transparent 42%),
+			radial-gradient(ellipse at 90% 80%, color-mix(in oklab, var(--azure) 12%, transparent), transparent 40%),
+			var(--canvas);
+		overflow: clip;
 	}
 
 	.head {
 		width: min(100%, 72rem);
-		margin: 0 auto 1.75rem;
+		margin: 0 auto 0.5rem;
 		padding: 0 clamp(0.9rem, 3vw, 2rem);
+		position: relative;
+		z-index: 2;
 	}
 
 	.kicker {
-		margin: 0 0 0.4rem;
+		margin: 0 0 0.35rem;
 		font-family: var(--font-hand);
-		font-size: 1.35rem;
+		font-size: clamp(1.3rem, 3vw, 1.7rem);
 		color: var(--blood);
-		transform: rotate(-2deg);
+		transform: rotate(-2.5deg);
 		transform-origin: left;
 	}
 
 	h2 {
 		margin: 0;
-		max-width: 12ch;
+		display: grid;
+		gap: 0.1rem;
+	}
+
+	.stamp {
+		display: block;
+		max-width: 14ch;
 		font-family: var(--font-stamp);
-		font-size: clamp(2.3rem, 7vw, 4.6rem);
-		line-height: 0.92;
+		font-size: clamp(2.4rem, 8vw, 5rem);
+		line-height: 0.88;
 		text-transform: uppercase;
 		letter-spacing: 0.01em;
+		text-shadow: 3px 4px 0 color-mix(in oklab, var(--ink) 18%, transparent);
 	}
 
-	.sub {
-		margin: 0.75rem 0 0;
-		max-width: 28rem;
-		font-size: 1.05rem;
-		opacity: 0.8;
+	.stamp.accent {
+		color: var(--pink);
+		transform: rotate(-1.5deg);
+		text-shadow:
+			3px 4px 0 var(--ink),
+			-1px -1px 0 var(--yellow);
 	}
 
-	.stack {
-		display: grid;
-		gap: clamp(2rem, 5vh, 3.5rem);
-		padding: 0 clamp(0.6rem, 2vw, 1.5rem);
+	.wall {
+		position: relative;
+		width: min(100%, 78rem);
+		margin: 1.5rem auto 0;
+		min-height: clamp(52rem, 118vw, 68rem);
+		padding: 0 clamp(0.4rem, 1.5vw, 1rem);
 	}
 
 	.piece {
-		width: min(100%, 58rem);
-		margin: 0 auto;
+		position: absolute;
+		margin: 0;
 		opacity: 0;
-		transform: translateY(2.5rem) rotate(-1deg);
+		transform: translateY(2.8rem) rotate(var(--rot));
 		transition:
-			opacity 0.8s var(--ease),
-			transform 0.8s var(--ease);
-		transition-delay: calc(var(--i) * 0.07s);
+			opacity 0.85s var(--ease),
+			transform 0.85s var(--ease),
+			z-index 0s;
+		transition-delay: calc(var(--i) * 0.09s);
+		z-index: calc(2 + var(--i));
 	}
 
-	.piece.offset {
-		margin-left: auto;
-		margin-right: clamp(0rem, 4vw, 3rem);
-		transform: translateY(2.5rem) rotate(1.4deg);
-	}
-
-	.work:global(.visible) .piece,
-	.work:global(.visible) .piece.offset {
+	.work:global(.visible) .piece {
 		opacity: 1;
-		transform: rotate(var(--final-rot, -0.8deg));
+		transform: rotate(var(--rot));
 	}
 
-	.work:global(.visible) .piece.offset {
-		--final-rot: 1deg;
+	.piece:hover,
+	.piece:focus-within {
+		z-index: 20;
+		transform: rotate(0deg) scale(1.03);
 	}
 
 	figure {
@@ -103,22 +124,23 @@
 		position: relative;
 		background: var(--void);
 		box-shadow:
-			0 2px 0 color-mix(in oklab, var(--ink) 20%, transparent),
-			12px 18px 40px rgba(0, 0, 0, 0.22);
+			0 1px 0 color-mix(in oklab, var(--ink) 25%, transparent),
+			14px 22px 48px rgba(0, 0, 0, 0.28);
 		overflow: hidden;
-		clip-path: polygon(0 1%, 100% 0, 99% 99%, 1% 100%);
+		clip-path: polygon(0 1.2%, 100% 0, 98.8% 98.5%, 1.2% 100%);
 	}
 
 	figure img:first-child {
 		width: 100%;
-		aspect-ratio: 4 / 5;
+		height: 100%;
 		object-fit: cover;
 		object-position: center top;
-		transition: transform 0.7s var(--ease);
+		transition: transform 0.7s var(--ease), filter 0.4s ease;
 	}
 
 	.piece:hover figure img:first-child {
-		transform: scale(1.04);
+		transform: scale(1.06);
+		filter: contrast(1.06) saturate(1.08);
 	}
 
 	.drip {
@@ -127,44 +149,177 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		opacity: 0.18;
+		opacity: 0.2;
 		mix-blend-mode: multiply;
 		pointer-events: none;
+		animation: drip-pulse 7s ease-in-out infinite alternate;
 	}
 
-	.meta {
-		display: grid;
-		gap: 0.15rem;
-		padding: 0.85rem 0.35rem 0;
+	.graffiti {
+		position: absolute;
+		inset: auto 0 0;
+		padding: 2.5rem 0.75rem 0.7rem;
+		background: linear-gradient(to top, rgba(12, 12, 12, 0.88) 0%, rgba(12, 12, 12, 0.2) 70%, transparent);
+		color: var(--cream);
+		pointer-events: none;
 	}
 
 	.year {
 		margin: 0;
 		font-family: var(--font-hand);
 		font-size: 1.15rem;
-		color: var(--azure);
+		color: var(--yellow);
+		transform: rotate(-2deg);
+		transform-origin: left;
 	}
 
 	h3 {
 		margin: 0;
 		font-family: var(--font-stamp);
-		font-size: clamp(1.6rem, 4vw, 2.4rem);
+		font-size: clamp(1.35rem, 3.2vw, 2.1rem);
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
+		text-shadow: 2px 3px 0 rgba(0, 0, 0, 0.55);
 	}
 
 	.note {
 		margin: 0.15rem 0 0;
-		font-size: 0.95rem;
-		opacity: 0.72;
-		max-width: 36rem;
+		font-size: 0.88rem;
+		opacity: 0.78;
+		max-width: 28rem;
 	}
 
-	@media (max-width: 700px) {
+	/* collage slots — overlapping wall */
+	.hero {
+		top: 2%;
+		left: 2%;
+		width: min(52%, 28rem);
+	}
+
+	.hero figure {
+		aspect-ratio: 4 / 5;
+	}
+
+	.tall {
+		top: 4%;
+		right: 1%;
+		width: min(42%, 22rem);
+	}
+
+	.tall figure {
+		aspect-ratio: 3 / 4;
+	}
+
+	.wide {
+		top: 48%;
+		left: 18%;
+		width: min(48%, 26rem);
+	}
+
+	.wide figure {
+		aspect-ratio: 5 / 4;
+		clip-path: polygon(1% 0, 100% 2%, 99% 100%, 0 97%);
+	}
+
+	.scrap:nth-of-type(4) {
+		top: 42%;
+		right: 4%;
+		width: min(34%, 17rem);
+	}
+
+	.scrap:nth-of-type(5) {
+		top: 72%;
+		left: 3%;
+		width: min(30%, 15rem);
+	}
+
+	.scrap:nth-of-type(6) {
+		top: 76%;
+		right: 18%;
+		width: min(22%, 11rem);
+	}
+
+	.scrap figure {
+		aspect-ratio: 1 / 1;
+	}
+
+	.wall-tag {
+		position: absolute;
+		bottom: 4%;
+		left: 42%;
+		margin: 0;
+		font-family: var(--font-hand);
+		font-size: clamp(2rem, 6vw, 3.5rem);
+		color: var(--azure);
+		opacity: 0;
+		transform: rotate(8deg);
+		pointer-events: none;
+		transition: opacity 0.9s 0.55s var(--ease);
+	}
+
+	.work:global(.visible) .wall-tag {
+		opacity: 0.55;
+	}
+
+	@keyframes drip-pulse {
+		from {
+			opacity: 0.14;
+		}
+		to {
+			opacity: 0.28;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.wall {
+			display: grid;
+			gap: 1.35rem;
+			min-height: 0;
+			padding: 0 clamp(0.65rem, 3vw, 1rem);
+		}
+
 		.piece,
-		.piece.offset {
-			margin-left: 0;
-			margin-right: 0;
+		.hero,
+		.tall,
+		.wide,
+		.scrap:nth-of-type(4),
+		.scrap:nth-of-type(5),
+		.scrap:nth-of-type(6) {
+			position: relative;
+			top: auto;
+			left: auto;
+			right: auto;
+			width: 100%;
+			margin: 0;
+		}
+
+		.piece:nth-child(even) {
+			width: 92%;
+			margin-left: auto;
+		}
+
+		.piece:nth-child(odd) {
+			width: 94%;
+		}
+
+		.hero figure,
+		.tall figure,
+		.wide figure,
+		.scrap figure {
+			aspect-ratio: 4 / 5;
+		}
+
+		.wall-tag {
+			position: relative;
+			bottom: auto;
+			left: auto;
+			margin: 0.5rem 0 0;
+			text-align: right;
+			opacity: 0.45;
+		}
+
+		.work:global(.visible) .wall-tag {
+			opacity: 0.45;
 		}
 	}
 </style>

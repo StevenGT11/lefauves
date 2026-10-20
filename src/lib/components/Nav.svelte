@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { navLinks } from '../data/site.js';
+
 	let open = $state(false);
 
 	function close() {
@@ -27,9 +29,9 @@
 	</button>
 
 	<nav id="site-nav" class="links" aria-label="Primary">
-		<a href="#work" onclick={close}>Work</a>
-		<a href="#about" onclick={close}>Studio</a>
-		<a href="#contact" onclick={close}>Contact</a>
+		{#each navLinks as link, i (link.href)}
+			<a href={link.href} onclick={close} style:--i={i}>{link.label}</a>
+		{/each}
 	</nav>
 </header>
 
@@ -90,14 +92,17 @@
 
 	.links {
 		display: flex;
-		gap: 0.35rem;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 0.3rem;
+		max-width: min(100%, 36rem);
 	}
 
 	.links a {
-		padding: 0.55rem 0.85rem;
+		padding: 0.5rem 0.7rem;
 		font-family: var(--font-stamp);
-		font-size: 0.95rem;
-		letter-spacing: 0.06em;
+		font-size: 0.88rem;
+		letter-spacing: 0.05em;
 		text-transform: uppercase;
 		background: var(--ink);
 		color: var(--cream);
@@ -110,21 +115,27 @@
 	.links a:nth-child(1) {
 		--r: -2deg;
 	}
-
 	.links a:nth-child(2) {
-		--r: 1.5deg;
+		--r: 1.4deg;
 		background: var(--pink);
-		color: var(--cream);
 	}
-
 	.links a:nth-child(3) {
-		--r: -1deg;
+		--r: -1.2deg;
 		background: var(--azure);
-		color: var(--cream);
+	}
+	.links a:nth-child(4) {
+		--r: 1.8deg;
+		background: color-mix(in oklab, var(--ink) 88%, var(--yellow));
+	}
+	.links a:nth-child(5) {
+		--r: -0.8deg;
+		background: var(--blood);
 	}
 
 	.links a:hover {
 		transform: rotate(0deg) translateY(-2px) scale(1.04);
+		background: var(--yellow);
+		color: var(--ink);
 	}
 
 	.menu-btn {
@@ -140,7 +151,7 @@
 		position: relative;
 	}
 
-	@media (max-width: 760px) {
+	@media (max-width: 900px) {
 		.menu-btn {
 			display: grid;
 		}
@@ -149,17 +160,21 @@
 			position: fixed;
 			inset: 0;
 			z-index: 1;
+			max-width: none;
 			flex-direction: column;
+			flex-wrap: nowrap;
 			justify-content: center;
 			align-items: stretch;
-			gap: 0.75rem;
+			gap: 0.65rem;
 			padding: 5rem 1.25rem;
 			background:
 				linear-gradient(160deg, color-mix(in oklab, var(--pink) 55%, var(--canvas)), var(--canvas) 60%);
 			opacity: 0;
 			visibility: hidden;
 			pointer-events: none;
-			transition: opacity 0.3s var(--ease), visibility 0.3s;
+			transition:
+				opacity 0.3s var(--ease),
+				visibility 0.3s;
 		}
 
 		.open .links {
@@ -169,8 +184,8 @@
 		}
 
 		.links a {
-			font-size: clamp(2rem, 10vw, 3rem);
-			padding: 1rem 1.1rem;
+			font-size: clamp(1.8rem, 9vw, 2.8rem);
+			padding: 0.9rem 1.1rem;
 			text-align: left;
 			transform: none !important;
 			box-shadow: 6px 8px 0 color-mix(in oklab, var(--ink) 25%, transparent);

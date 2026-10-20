@@ -20,8 +20,8 @@
 			memoria · inocencia · máscaras — paint that still drips
 		</p>
 		<div class="actions">
-			<a class="btn" href="#work">see the canvases</a>
-			<a class="btn ghost" href="#contact">collector / DM</a>
+			<a class="btn" href="/collections">see the canvases</a>
+			<a class="btn ghost" href="/contact">collector / DM</a>
 		</div>
 	</div>
 </section>

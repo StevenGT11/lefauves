@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { navLinks } from '../data/site.js';
 
 	let open = $state(false);
@@ -6,10 +7,14 @@
 	function close() {
 		open = false;
 	}
+
+	function isActive(href: string) {
+		return page.url.pathname === href || page.url.pathname.startsWith(`${href}/`);
+	}
 </script>
 
 <header class="nav" class:open>
-	<a class="brand" href="#top" onclick={close}>
+	<a class="brand" href="/" onclick={close}>
 		<img class="mark" src="/art/studio-07.png" alt="" />
 		<span>
 			<em>@lefauves</em>
@@ -30,7 +35,15 @@
 
 	<nav id="site-nav" class="links" aria-label="Primary">
 		{#each navLinks as link, i (link.href)}
-			<a href={link.href} onclick={close} style:--i={i}>{link.label}</a>
+			<a
+				href={link.href}
+				onclick={close}
+				class:active={isActive(link.href)}
+				aria-current={isActive(link.href) ? 'page' : undefined}
+				style:--i={i}
+			>
+				{link.label}
+			</a>
 		{/each}
 	</nav>
 </header>
@@ -94,22 +107,23 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-end;
-		gap: 0.3rem;
-		max-width: min(100%, 36rem);
+		gap: 0.28rem;
+		max-width: min(100%, 42rem);
 	}
 
 	.links a {
-		padding: 0.5rem 0.7rem;
+		padding: 0.45rem 0.65rem;
 		font-family: var(--font-stamp);
-		font-size: 0.88rem;
-		letter-spacing: 0.05em;
+		font-size: 0.78rem;
+		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		background: var(--ink);
 		color: var(--cream);
 		transform: rotate(var(--r, -1deg));
 		transition:
 			background 0.2s ease,
-			transform 0.2s var(--ease);
+			transform 0.2s var(--ease),
+			box-shadow 0.2s ease;
 	}
 
 	.links a:nth-child(1) {
@@ -124,12 +138,22 @@
 		background: var(--azure);
 	}
 	.links a:nth-child(4) {
-		--r: 1.8deg;
-		background: color-mix(in oklab, var(--ink) 88%, var(--yellow));
+		--r: 1.6deg;
+		background: color-mix(in oklab, var(--ink) 85%, var(--yellow));
 	}
 	.links a:nth-child(5) {
 		--r: -0.8deg;
 		background: var(--blood);
+	}
+	.links a:nth-child(6) {
+		--r: 1deg;
+		background: color-mix(in oklab, var(--true-blue) 90%, var(--ink));
+	}
+
+	.links a.active {
+		background: var(--yellow);
+		color: var(--ink);
+		box-shadow: 0 0 0 2px var(--ink);
 	}
 
 	.links a:hover {
@@ -151,7 +175,7 @@
 		position: relative;
 	}
 
-	@media (max-width: 900px) {
+	@media (max-width: 980px) {
 		.menu-btn {
 			display: grid;
 		}
@@ -165,7 +189,7 @@
 			flex-wrap: nowrap;
 			justify-content: center;
 			align-items: stretch;
-			gap: 0.65rem;
+			gap: 0.55rem;
 			padding: 5rem 1.25rem;
 			background:
 				linear-gradient(160deg, color-mix(in oklab, var(--pink) 55%, var(--canvas)), var(--canvas) 60%);
@@ -184,8 +208,8 @@
 		}
 
 		.links a {
-			font-size: clamp(1.8rem, 9vw, 2.8rem);
-			padding: 0.9rem 1.1rem;
+			font-size: clamp(1.55rem, 7.5vw, 2.4rem);
+			padding: 0.85rem 1.1rem;
 			text-align: left;
 			transform: none !important;
 			box-shadow: 6px 8px 0 color-mix(in oklab, var(--ink) 25%, transparent);

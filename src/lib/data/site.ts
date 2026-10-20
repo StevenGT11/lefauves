@@ -8,6 +8,61 @@ export const contact = {
 	shipping: 'Worldwide collector inquiries · international shipping'
 } as const;
 
+/** Mirrors live site IA (johnpaulfauves.com) */
+export const navLinks = [
+	{ href: '/collections', label: 'Collections' },
+	{ href: '/artist-story', label: 'Artist Story' },
+	{ href: '/studio', label: 'Studio' },
+	{ href: '/one-of-one-commission', label: 'Commission' },
+	{ href: '/upcoming-events', label: 'Events' },
+	{ href: '/contact', label: 'Contact' }
+] as const;
+
+export const homeGates = [
+	{
+		href: '/collections',
+		kicker: 'the work',
+		title: 'Collections',
+		note: 'Available & recent originals — canvases with presence.',
+		rot: -2.2
+	},
+	{
+		href: '/artist-story',
+		kicker: 'who paints',
+		title: 'Artist Story',
+		note: 'Raw, alive, deeply human — Costa Rica → the world.',
+		rot: 1.6
+	},
+	{
+		href: '/studio',
+		kicker: 'behind',
+		title: 'Studio',
+		note: 'Process, wet floors, masks — by appointment.',
+		rot: -1.1
+	},
+	{
+		href: '/one-of-one-commission',
+		kicker: 'make one',
+		title: 'One of One',
+		note: 'Private commissions for collectors & spaces.',
+		rot: 2.0
+	},
+	{
+		href: '/upcoming-events',
+		kicker: 'in the room',
+		title: 'Events',
+		note: 'Private shows, live paint, 21 Grams · CDMX.',
+		rot: -1.7
+	},
+	{
+		href: '/contact',
+		kicker: 'write',
+		title: 'Contact',
+		note: 'WhatsApp · email · San José studio.',
+		rot: 1.2
+	}
+] as const;
+
 export const collectPaths = [
 	{
 		id: 'originals',
@@ -74,21 +129,20 @@ export const press = [
 	}
 ] as const;
 
-export const igStrip = [
-	{ src: '/art/true-bros.png', alt: 'True Bros canvas detail' },
-	{ src: '/art/marilyn-collage.png', alt: 'Marilyn collage detail' },
-	{ src: '/art/studio-05.jpeg', alt: 'Guchez painting' },
-	{ src: '/art/studio-03.jpg', alt: 'Studio mask session' },
-	{ src: '/art/studio-04.jpeg', alt: 'Buck Grin painting' },
-	{ src: '/art/studio-01.jpeg', alt: 'Studio wall and Mickey canvas' },
-	{ src: '/art/studio-02.png', alt: 'Process paint on floor' },
-	{ src: '/art/studio-06.png', alt: 'Close studio painting detail' }
-] as const;
-
-export const navLinks = [
-	{ href: '#work', label: 'Work' },
-	{ href: '#collect', label: 'Collect' },
-	{ href: '#about', label: 'Studio' },
-	{ href: '#press', label: 'Press' },
-	{ href: '#contact', label: 'Contact' }
+export const artistBeats = [
+	{
+		year: 'now',
+		title: 'Presence over decoration',
+		body: 'Work made to shift the energy of a room — identity, tension, soul.'
+	},
+	{
+		year: 'language',
+		title: 'Instinct first',
+		body: 'Bold characters, expressive color, urban texture, distorted emotion.'
+	},
+	{
+		year: 'place',
+		title: 'Costa Rica → collectors',
+		body: 'San José studio. Worldwide inquiries. Private visits by appointment.'
+	}
 ] as const;

@@ -6,8 +6,8 @@
 
 <footer class="footer" id="site-footer">
 	<div class="wall">
-		<img class="bg" src="/art/studio-01.jpeg" alt="" aria-hidden="true" />
-		<img class="scrap" src="/art/studio-07.png" alt="" aria-hidden="true" />
+		<img class="bg" src="/live/6a046fb00c147b8eeac6fda2.jpeg" alt="" aria-hidden="true" />
+		<img class="scrap" src="/live/6a02ac10c56db4013f5d28b8.png" alt="" aria-hidden="true" />
 		<img class="drips" src="/art/drip-overlay.svg" alt="" aria-hidden="true" />
 		<div class="veil"></div>
 
@@ -23,11 +23,11 @@
 
 			<nav class="col" aria-label="Footer">
 				<p class="label">on this site</p>
+				<a href="/">Home</a>
 				{#each navLinks as link (link.href)}
 					<a href={link.href}>{link.label}</a>
 				{/each}
-				<a href="#process">Process</a>
-				<a href="#instagram">Instagram strip</a>
+				<a href="/21-grams-cdmx">21 Grams · CDMX</a>
 			</nav>
 
 			<div class="col">
@@ -45,10 +45,10 @@
 
 			<div class="col">
 				<p class="label">collect</p>
-				<a href="#collect">Available originals</a>
-				<a href="#collect">Private commissions</a>
-				<a href="#collect">Studio visits</a>
-				<a href="#contact">Collector inquiry</a>
+				<a href="/collections">Collections</a>
+				<a href="/one-of-one-commission">Private commissions</a>
+				<a href="/studio">Studio visits</a>
+				<a href="/contact">Collector inquiry</a>
 				<p class="meta">Private appointments only · no cold gallery quiet.</p>
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 		<div class="bar">
 			<p>© {year} John Paul Fauves · Lefauves</p>
 			<p class="credit">
-				Site collage · real canvases ·
+				Images from johnpaulfauves.com CDN ·
 				<a href="https://github.com/StevenGT11/lefauves" rel="noopener noreferrer" target="_blank"
 					>lefauves on GitHub</a
 				>

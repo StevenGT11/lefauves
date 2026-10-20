@@ -26,7 +26,7 @@
 				{#each navLinks as link (link.href)}
 					<a href={link.href}>{link.label}</a>
 				{/each}
-				<a href="#experiences">Experiences</a>
+				<a href="#process">Process</a>
 				<a href="#instagram">Instagram strip</a>
 			</nav>
 

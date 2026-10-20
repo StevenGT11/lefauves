@@ -47,29 +47,6 @@ export const collectPaths = [
 	}
 ] as const;
 
-export const experiences = [
-	{
-		id: 'private-shows',
-		title: 'Private shows',
-		note: 'Invitation-only viewings and collection releases.'
-	},
-	{
-		id: 'live-paint',
-		title: 'Live painting',
-		note: 'Sessions where the canvas still drips in the room.'
-	},
-	{
-		id: 'masks',
-		title: 'Mask rooms',
-		note: 'Hand-painted masks · live models · dual identity.'
-	},
-	{
-		id: 'cdmx',
-		title: '21 Grams · CDMX',
-		note: 'Upcoming solo show energy — memoria, inocencia, máscaras.'
-	}
-] as const;
-
 export const press = [
 	{
 		outlet: 'Vogue Italia',

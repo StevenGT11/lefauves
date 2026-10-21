@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { homeAnchors, pageRoutes } from '../data/site.js';
+	import { pageRoutes } from '../data/site.js';
 
 	let open = $state(false);
 
@@ -15,7 +15,7 @@
 </script>
 
 <header class="nav" class:open>
-	<a class="brand" href="/#top" onclick={close}>
+	<a class="brand" href="/" onclick={close}>
 		<img class="mark" src="/art/studio-07.png" alt="" />
 		<span>
 			<em>@lefauves</em>
@@ -34,34 +34,18 @@
 		{open ? '✕' : '≡'}
 	</button>
 
-	<nav id="site-nav" class="panel" aria-label="Primary">
-		<div class="group">
-			<p class="group-label">On this page</p>
-			<div class="links scroll">
-				{#each homeAnchors as link, i (link.href)}
-					<a href={link.href} onclick={close} style:--i={i}>
-						{link.label}
-					</a>
-				{/each}
-			</div>
-		</div>
-
-		<div class="group">
-			<p class="group-label">Pages</p>
-			<div class="links pages">
-				{#each pageRoutes as link, i (link.href)}
-					<a
-						href={link.href}
-						onclick={close}
-						class:active={isPageActive(link.href)}
-						aria-current={isPageActive(link.href) ? 'page' : undefined}
-						style:--i={i}
-					>
-						{link.label}
-					</a>
-				{/each}
-			</div>
-		</div>
+	<nav id="site-nav" class="links" aria-label="Primary">
+		{#each pageRoutes as link, i (link.href)}
+			<a
+				href={link.href}
+				onclick={close}
+				class:active={isPageActive(link.href)}
+				aria-current={isPageActive(link.href) ? 'page' : undefined}
+				style:--i={i}
+			>
+				{link.label}
+			</a>
+		{/each}
 	</nav>
 </header>
 
@@ -71,7 +55,7 @@
 		inset: 0 0 auto;
 		z-index: 200;
 		display: flex;
-		align-items: flex-start;
+		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
 		padding: 0.75rem clamp(0.75rem, 2.5vw, 1.5rem);
@@ -120,79 +104,55 @@
 		letter-spacing: 0.04em;
 	}
 
-	.panel {
-		display: grid;
-		gap: 0.45rem;
-		justify-items: end;
-		max-width: min(100%, 46rem);
-	}
-
-	.group {
-		display: grid;
-		gap: 0.2rem;
-		justify-items: end;
-	}
-
-	.group-label {
-		margin: 0;
-		font-family: var(--font-hand);
-		font-size: 0.95rem;
-		color: var(--ink);
-		background: color-mix(in oklab, var(--cream) 85%, transparent);
-		padding: 0.1rem 0.45rem;
-		transform: rotate(-1deg);
-		opacity: 0.85;
-	}
-
 	.links {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-end;
-		gap: 0.25rem;
+		gap: 0.28rem;
+		max-width: min(100%, 46rem);
 	}
 
 	.links a {
-		padding: 0.4rem 0.6rem;
+		padding: 0.45rem 0.65rem;
 		font-family: var(--font-stamp);
-		font-size: 0.72rem;
+		font-size: 0.78rem;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
-		background: var(--ink);
 		color: var(--cream);
 		transform: rotate(var(--r, -1deg));
 		transition:
 			background 0.2s ease,
 			transform 0.2s var(--ease),
 			box-shadow 0.2s ease;
-	}
-
-	.scroll a:nth-child(odd) {
-		--r: -1.5deg;
-	}
-	.scroll a:nth-child(even) {
-		--r: 1.2deg;
-		background: color-mix(in oklab, var(--ink) 88%, var(--azure));
-	}
-
-	.pages a {
-		background: var(--pink);
-	}
-	.pages a:nth-child(2) {
-		background: var(--azure);
-	}
-	.pages a:nth-child(3) {
-		background: var(--blood);
-	}
-	.pages a:nth-child(4) {
-		background: color-mix(in oklab, var(--ink) 80%, var(--yellow));
-	}
-	.pages a:nth-child(5) {
-		background: var(--true-blue);
-	}
-	.pages a:nth-child(6) {
 		background: var(--ink);
 	}
-	.pages a:nth-child(7) {
+
+	.links a:nth-child(1) {
+		--r: -2deg;
+		background: var(--pink);
+	}
+	.links a:nth-child(2) {
+		--r: 1.4deg;
+		background: var(--azure);
+	}
+	.links a:nth-child(3) {
+		--r: -1.2deg;
+		background: var(--blood);
+	}
+	.links a:nth-child(4) {
+		--r: 1.6deg;
+		background: color-mix(in oklab, var(--ink) 80%, var(--yellow));
+	}
+	.links a:nth-child(5) {
+		--r: -0.8deg;
+		background: var(--true-blue);
+	}
+	.links a:nth-child(6) {
+		--r: 1deg;
+		background: var(--ink);
+	}
+	.links a:nth-child(7) {
+		--r: -1.4deg;
 		background: color-mix(in oklab, var(--pink) 70%, var(--ink));
 	}
 
@@ -221,20 +181,22 @@
 		position: relative;
 	}
 
-	@media (max-width: 1100px) {
+	@media (max-width: 980px) {
 		.menu-btn {
 			display: grid;
 		}
 
-		.panel {
+		.links {
 			position: fixed;
 			inset: 0;
 			z-index: 1;
 			max-width: none;
-			justify-items: stretch;
-			align-content: center;
-			gap: 1.25rem;
-			padding: 5rem 1.25rem 2rem;
+			flex-direction: column;
+			flex-wrap: nowrap;
+			justify-content: center;
+			align-items: stretch;
+			gap: 0.55rem;
+			padding: 5rem 1.25rem;
 			background:
 				linear-gradient(160deg, color-mix(in oklab, var(--pink) 55%, var(--canvas)), var(--canvas) 60%);
 			opacity: 0;
@@ -245,34 +207,18 @@
 				visibility 0.3s;
 		}
 
-		.open .panel {
+		.open .links {
 			opacity: 1;
 			visibility: visible;
 			pointer-events: auto;
 		}
 
-		.group {
-			justify-items: stretch;
-		}
-
-		.group-label {
-			justify-self: start;
-			font-size: 1.2rem;
-			transform: rotate(-2deg);
-		}
-
-		.links {
-			flex-direction: column;
-			align-items: stretch;
-			gap: 0.45rem;
-		}
-
 		.links a {
-			font-size: clamp(1.35rem, 6.5vw, 2rem);
-			padding: 0.75rem 1rem;
+			font-size: clamp(1.45rem, 7vw, 2.2rem);
+			padding: 0.85rem 1.1rem;
 			text-align: left;
 			transform: none !important;
-			box-shadow: 5px 7px 0 color-mix(in oklab, var(--ink) 22%, transparent);
+			box-shadow: 6px 8px 0 color-mix(in oklab, var(--ink) 25%, transparent);
 		}
 	}
 </style>

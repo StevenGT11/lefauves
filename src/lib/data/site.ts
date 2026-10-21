@@ -23,11 +23,11 @@ export const homeAnchors = [
 export const pageRoutes = [
 	{ href: '/collections', label: 'Collections' },
 	{ href: '/artist-story', label: 'Artist Story' },
-	{ href: '/studio', label: 'Studio Page' },
+	{ href: '/studio', label: 'Studio' },
 	{ href: '/one-of-one-commission', label: 'Commission' },
-	{ href: '/upcoming-events', label: 'Events Page' },
+	{ href: '/upcoming-events', label: 'Events' },
 	{ href: '/21-grams-cdmx', label: '21 Grams' },
-	{ href: '/contact', label: 'Contact Page' }
+	{ href: '/contact', label: 'Contact' }
 ] as const;
 
 /** @deprecated use homeAnchors — kept for any leftover imports */

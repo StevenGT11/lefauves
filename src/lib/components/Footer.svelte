@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { contact, navLinks, pageRoutes } from '../data/site.js';
+	import { contact, homeAnchors, pageRoutes } from '../data/site.js';
 
 	const year = new Date().getFullYear();
 </script>
@@ -24,7 +24,7 @@
 			<nav class="col" aria-label="Footer">
 				<p class="label">home scroll</p>
 				<a href="/#top">Home</a>
-				{#each navLinks as link (link.href)}
+				{#each homeAnchors as link (link.href)}
 					<a href={link.href}>{link.label}</a>
 				{/each}
 			</nav>

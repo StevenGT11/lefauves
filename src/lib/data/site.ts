@@ -8,29 +8,30 @@ export const contact = {
 	shipping: 'Worldwide collector inquiries · international shipping'
 } as const;
 
-/**
- * Primary nav: home anchors for the long scroll + full routes for deep pages.
- * Paths like `/#work` land on home sections from any route.
- */
-export const navLinks = [
-	{ href: '/#work', label: 'Work', match: '/collections' },
-	{ href: '/#collect', label: 'Collect', match: '/one-of-one-commission' },
-	{ href: '/artist-story', label: 'Story', match: '/artist-story' },
-	{ href: '/#about', label: 'Studio', match: '/studio' },
-	{ href: '/#events', label: 'Events', match: '/upcoming-events' },
-	{ href: '/#contact', label: 'Contact', match: '/contact' }
+/** Long-home anchors — land on `/` sections from any route */
+export const homeAnchors = [
+	{ href: '/#work', label: 'Work' },
+	{ href: '/#collect', label: 'Collect' },
+	{ href: '/#about', label: 'Studio' },
+	{ href: '/#process', label: 'Process' },
+	{ href: '/#events', label: 'Events' },
+	{ href: '/#press', label: 'Press' },
+	{ href: '/#contact', label: 'Contact' }
 ] as const;
 
-/** Full-page routes (footer / CTAs) */
+/** Full individual pages (dual IA with the long home) */
 export const pageRoutes = [
 	{ href: '/collections', label: 'Collections' },
 	{ href: '/artist-story', label: 'Artist Story' },
-	{ href: '/studio', label: 'Studio' },
+	{ href: '/studio', label: 'Studio Page' },
 	{ href: '/one-of-one-commission', label: 'Commission' },
-	{ href: '/upcoming-events', label: 'Events' },
-	{ href: '/21-grams-cdmx', label: '21 Grams · CDMX' },
-	{ href: '/contact', label: 'Contact' }
+	{ href: '/upcoming-events', label: 'Events Page' },
+	{ href: '/21-grams-cdmx', label: '21 Grams' },
+	{ href: '/contact', label: 'Contact Page' }
 ] as const;
+
+/** @deprecated use homeAnchors — kept for any leftover imports */
+export const navLinks = homeAnchors;
 
 export const collectPaths = [
 	{

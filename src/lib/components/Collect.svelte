@@ -31,6 +31,7 @@
 
 		<div class="ctas">
 			<a class="cta" href="/one-of-one-commission">one of one commission →</a>
+			<a class="cta ghost" href="/collections">full collections →</a>
 			<a class="cta ghost" href="#contact">inquiry · {contact.instagram}</a>
 		</div>
 	</div>

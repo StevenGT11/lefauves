@@ -20,6 +20,10 @@
 			</blockquote>
 		{/each}
 	</div>
+
+	<p class="more">
+		<a href="/artist-story">read the artist story →</a>
+	</p>
 </section>
 
 <style>
@@ -107,6 +111,23 @@
 		font-family: var(--font-hand);
 		font-size: clamp(1.25rem, 2.4vw, 1.55rem);
 		line-height: 1.2;
+	}
+
+	.more {
+		width: min(100%, 72rem);
+		margin: 1.35rem auto 0;
+		font-family: var(--font-stamp);
+		font-size: 0.9rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.more a {
+		color: var(--azure);
+	}
+
+	.more a:hover {
+		color: var(--pink);
 	}
 
 	@media (max-width: 900px) {

@@ -8,13 +8,16 @@
 		open = false;
 	}
 
-	function isActive(href: string) {
-		return page.url.pathname === href || page.url.pathname.startsWith(`${href}/`);
+	function isActive(href: string, match?: string) {
+		const path = page.url.pathname;
+		if (match && (path === match || path.startsWith(`${match}/`))) return true;
+		if (href.startsWith('/#')) return path === '/';
+		return path === href || path.startsWith(`${href}/`);
 	}
 </script>
 
 <header class="nav" class:open>
-	<a class="brand" href="/" onclick={close}>
+	<a class="brand" href="/#top" onclick={close}>
 		<img class="mark" src="/art/studio-07.png" alt="" />
 		<span>
 			<em>@lefauves</em>
@@ -38,8 +41,8 @@
 			<a
 				href={link.href}
 				onclick={close}
-				class:active={isActive(link.href)}
-				aria-current={isActive(link.href) ? 'page' : undefined}
+				class:active={isActive(link.href, link.match)}
+				aria-current={isActive(link.href, link.match) ? 'page' : undefined}
 				style:--i={i}
 			>
 				{link.label}

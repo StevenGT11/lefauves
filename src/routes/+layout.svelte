@@ -27,7 +27,7 @@
 	<title>FAUVES · John Paul Fauves</title>
 </svelte:head>
 
-<a class="skip" href="/collections">Skip to collections</a>
+<a class="skip" href="#work">Skip to canvases</a>
 <Nav />
 <main>
 	{@render children()}

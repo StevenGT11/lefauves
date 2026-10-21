@@ -8,59 +8,28 @@ export const contact = {
 	shipping: 'Worldwide collector inquiries · international shipping'
 } as const;
 
-/** Mirrors live site IA (johnpaulfauves.com) */
+/**
+ * Primary nav: home anchors for the long scroll + full routes for deep pages.
+ * Paths like `/#work` land on home sections from any route.
+ */
 export const navLinks = [
+	{ href: '/#work', label: 'Work', match: '/collections' },
+	{ href: '/#collect', label: 'Collect', match: '/one-of-one-commission' },
+	{ href: '/artist-story', label: 'Story', match: '/artist-story' },
+	{ href: '/#about', label: 'Studio', match: '/studio' },
+	{ href: '/#events', label: 'Events', match: '/upcoming-events' },
+	{ href: '/#contact', label: 'Contact', match: '/contact' }
+] as const;
+
+/** Full-page routes (footer / CTAs) */
+export const pageRoutes = [
 	{ href: '/collections', label: 'Collections' },
 	{ href: '/artist-story', label: 'Artist Story' },
 	{ href: '/studio', label: 'Studio' },
 	{ href: '/one-of-one-commission', label: 'Commission' },
 	{ href: '/upcoming-events', label: 'Events' },
+	{ href: '/21-grams-cdmx', label: '21 Grams · CDMX' },
 	{ href: '/contact', label: 'Contact' }
-] as const;
-
-export const homeGates = [
-	{
-		href: '/collections',
-		kicker: 'the work',
-		title: 'Collections',
-		note: 'Available & recent originals — canvases with presence.',
-		rot: -2.2
-	},
-	{
-		href: '/artist-story',
-		kicker: 'who paints',
-		title: 'Artist Story',
-		note: 'Raw, alive, deeply human — Costa Rica → the world.',
-		rot: 1.6
-	},
-	{
-		href: '/studio',
-		kicker: 'behind',
-		title: 'Studio',
-		note: 'Process, wet floors, masks — by appointment.',
-		rot: -1.1
-	},
-	{
-		href: '/one-of-one-commission',
-		kicker: 'make one',
-		title: 'One of One',
-		note: 'Private commissions for collectors & spaces.',
-		rot: 2.0
-	},
-	{
-		href: '/upcoming-events',
-		kicker: 'in the room',
-		title: 'Events',
-		note: 'Private shows, live paint, 21 Grams · CDMX.',
-		rot: -1.7
-	},
-	{
-		href: '/contact',
-		kicker: 'write',
-		title: 'Contact',
-		note: 'WhatsApp · email · San José studio.',
-		rot: 1.2
-	}
 ] as const;
 
 export const collectPaths = [

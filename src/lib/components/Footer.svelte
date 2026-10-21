@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { contact, navLinks } from '../data/site.js';
+	import { contact, navLinks, pageRoutes } from '../data/site.js';
 
 	const year = new Date().getFullYear();
 </script>
@@ -22,13 +22,19 @@
 			</div>
 
 			<nav class="col" aria-label="Footer">
-				<p class="label">on this site</p>
-				<a href="/">Home</a>
+				<p class="label">home scroll</p>
+				<a href="/#top">Home</a>
 				{#each navLinks as link (link.href)}
 					<a href={link.href}>{link.label}</a>
 				{/each}
-				<a href="/21-grams-cdmx">21 Grams · CDMX</a>
 			</nav>
+
+			<div class="col">
+				<p class="label">full pages</p>
+				{#each pageRoutes as link (link.href)}
+					<a href={link.href}>{link.label}</a>
+				{/each}
+			</div>
 
 			<div class="col">
 				<p class="label">studio / contact</p>
@@ -41,15 +47,6 @@
 				</a>
 				<p class="meta">{contact.studio}</p>
 				<p class="meta">{contact.shipping}</p>
-			</div>
-
-			<div class="col">
-				<p class="label">collect</p>
-				<a href="/collections">Collections</a>
-				<a href="/one-of-one-commission">Private commissions</a>
-				<a href="/studio">Studio visits</a>
-				<a href="/contact">Collector inquiry</a>
-				<p class="meta">Private appointments only · no cold gallery quiet.</p>
 			</div>
 		</div>
 
